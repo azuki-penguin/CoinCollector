@@ -12,6 +12,11 @@ namespace Controllers
         private float walkForce = 20.0f;
         private float maxWalkSpeed = 3.0f;
 
+        private bool HasReachedLeftMost =>
+            transform.position.x < Camera.main.ScreenToWorldPoint(Vector3.zero).x;
+        private bool HasReachedRightMost =>
+            transform.position.x > Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -31,13 +36,24 @@ namespace Controllers
                 Jump();
             }
 
+            if (HasReachedLeftMost || HasReachedRightMost)
+            {
+                Stop();
+            }
+
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                Move(DirectionModel.Left);
+                if (!HasReachedLeftMost)
+                {
+                    Move(DirectionModel.Left);
+                }
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                Move(DirectionModel.Right);
+                if (!HasReachedRightMost)
+                {
+                    Move(DirectionModel.Right);
+                }
             }
         }
 
@@ -67,6 +83,11 @@ namespace Controllers
             {
                 rigidBody.AddForce(transform.right * key * walkForce);
             }
+        }
+
+        private void Stop()
+        {
+             rigidBody.velocity = new Vector2(0, rigidBody.velocity.y);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
