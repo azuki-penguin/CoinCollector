@@ -8,13 +8,13 @@ namespace Models
     public class ScoreManager : MonoBehaviour
     {
         private GameObject ScoreText;
-        private ScoreModel Score;
+        public static ScoreModel Score = ScoreModel.GetInstance();
 
         // Start is called before the first frame update
         void Start()
         {
             ScoreText = GameObject.Find("Score");
-            Score = ScoreModel.GetInstance();
+            Score.ResetPoint();
         }
 
         // Update is called once per frame

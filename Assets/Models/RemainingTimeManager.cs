@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace Models
 {
@@ -24,7 +25,14 @@ namespace Models
         void Update()
         {
             remainingTime -= Time.deltaTime;
-            remainingTimeText.GetComponent<Text>().text = RemainingTimeString;
+            if (remainingTime < 0)
+            {
+                SceneManager.LoadScene("ResultScene");
+            }
+            else
+            {
+                remainingTimeText.GetComponent<Text>().text = RemainingTimeString;
+            }
         }
     }
 }
