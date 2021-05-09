@@ -68,6 +68,11 @@ namespace Controllers
                 rigidBody.AddForce(transform.right * key * walkForce);
             }
         }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            other.gameObject.SetActive(false);
+        }
     }
 }
 
