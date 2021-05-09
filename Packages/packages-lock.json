@@ -72,6 +72,16 @@
       "source": "builtin",
       "dependencies": {}
     },
+    "com.unity.2d.tilemap.extras": {
+      "version": "https://github.com/Unity-Technologies/2d-extras.git#2020.3",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.modules.tilemap": "1.0.0",
+        "com.unity.2d.tilemap": "1.0.0"
+      },
+      "hash": "23a107e41dab339ee0348c1adeee01338e8fc806"
+    },
     "com.unity.collab-proxy": {
       "version": "1.3.9",
       "depth": 0,
