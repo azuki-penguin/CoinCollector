@@ -48,7 +48,7 @@ namespace Controllers
 
         private void Move(DirectionModel direction)
         {
-            int key = 0;
+            var key = 0;
             if (direction == DirectionModel.Left)
             {
                 key = -1;
@@ -62,7 +62,7 @@ namespace Controllers
                 transform.localScale = new Vector3(key, 1, 1);
             }
 
-            float velocity = Mathf.Abs(rigidBody.velocity.x);
+            var velocity = Mathf.Abs(rigidBody.velocity.x);
             if (velocity < maxWalkSpeed)
             {
                 rigidBody.AddForce(transform.right * key * walkForce);
