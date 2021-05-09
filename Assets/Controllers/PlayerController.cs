@@ -11,6 +11,7 @@ namespace Controllers
         private float jumpForce = 400.0f;
         private float walkForce = 20.0f;
         private float maxWalkSpeed = 3.0f;
+        private GameObject ScoreManager;
 
         private bool HasReachedLeftMost =>
             transform.position.x < Camera.main.ScreenToWorldPoint(Vector3.zero).x;
@@ -21,6 +22,7 @@ namespace Controllers
         void Start()
         {
             rigidBody = GetComponent<Rigidbody2D>();
+            ScoreManager = GameObject.Find("ScoreManager");
         }
 
         // Update is called once per frame
@@ -93,6 +95,7 @@ namespace Controllers
         private void OnTriggerEnter2D(Collider2D other)
         {
             other.gameObject.SetActive(false);
+            ScoreManager.GetComponent<ScoreManager>().AddPoint();
         }
     }
 }
