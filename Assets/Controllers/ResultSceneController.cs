@@ -12,8 +12,9 @@ namespace Controllers
             SceneManager.LoadScene("GameScene");
         }
 
-        void MoveToTopScene()
+        public void MoveToTitleScene()
         {
+            SceneManager.LoadScene("TitleScene");
         }
     }
 }

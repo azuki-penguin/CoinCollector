@@ -407,6 +407,7 @@ GameObject:
   - component: {fileID: 117698982}
   - component: {fileID: 117698981}
   - component: {fileID: 117698980}
+  - component: {fileID: 117698983}
   m_Layer: 5
   m_Name: BackToTopButton
   m_TagString: Untagged
@@ -477,7 +478,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 117698981}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 117698983}
+        m_TargetAssemblyTypeName: Controllers.ResultSceneController, Assembly-CSharp
+        m_MethodName: MoveToTitleScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &117698981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,6 +529,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 117698978}
   m_CullTransparentMesh: 1
+--- !u!114 &117698983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117698978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f3a976f31f42f4aafa8904fbe4440c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &168043792
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,7 +756,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Back to top
+  m_Text: Back to title
 --- !u!222 &727357666
 CanvasRenderer:
   m_ObjectHideFlags: 0
