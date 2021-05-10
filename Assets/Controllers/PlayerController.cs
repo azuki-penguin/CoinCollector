@@ -12,6 +12,9 @@ namespace Controllers
         private float jumpForce = 400.0f;
         private float walkForce = 20.0f;
         private float maxWalkSpeed = 3.0f;
+        private float JumpSpeedThreshold = 1.2f;
+        private float WalkSpeedThreshold = 0.1f;
+        private PlayerStatus Status = PlayerStatus.Idle;
         private GameObject ScoreManager;
 
         private bool HasReachedLeftMost =>
@@ -30,7 +33,60 @@ namespace Controllers
         // Update is called once per frame
         void Update()
         {
+             Status = GetPlayerStatus();
+             SetAnimation();
            ObserveAction();
+        }
+
+        private PlayerStatus GetPlayerStatus()
+        {
+            if (IsJumping())
+            {
+                return PlayerStatus.Jump;
+            }
+            if (IsFalling())
+            {
+                return PlayerStatus.Fall;
+            }
+            if (IsWalking())
+            {
+                return PlayerStatus.Walk;
+            }
+            return PlayerStatus.Idle;
+        }
+
+        private void SetAnimation()
+        {
+            switch (Status)
+            {
+                case PlayerStatus.Idle:
+                    Animator.SetTrigger("IdleTrigger");
+                    break;
+                case PlayerStatus.Walk:
+                    Animator.SetTrigger("WalkTrigger");
+                    break;
+                case PlayerStatus.Jump:
+                    Animator.SetTrigger("JumpUpTrigger");
+                    break;
+                case PlayerStatus.Fall:
+                    Animator.SetTrigger("IdleTrigger");
+                    break;
+            }
+        }
+
+        private bool IsJumping()
+        {
+            return rigidBody.velocity.y > JumpSpeedThreshold;
+        }
+
+        private bool IsFalling()
+        {
+            return rigidBody.velocity.y < -JumpSpeedThreshold;
+        }
+
+        private bool IsWalking()
+        {
+            return Mathf.Abs(rigidBody.velocity.x) > WalkSpeedThreshold;
         }
 
         private void ObserveAction()
@@ -47,7 +103,6 @@ namespace Controllers
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                Animator.SetTrigger("WalkTrigger");
                 if (!HasReachedLeftMost)
                 {
                     Move(DirectionModel.Left);
@@ -55,17 +110,10 @@ namespace Controllers
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                Animator.SetTrigger("WalkTrigger");
                 if (!HasReachedRightMost)
                 {
                     Move(DirectionModel.Right);
                 }
-            }
-            if (rigidBody.velocity.x == 0
-              && !Input.GetKey(KeyCode.LeftArrow)
-              && !Input.GetKey(KeyCode.RightArrow))
-            {
-                Animator.SetTrigger("IdleTrigger");
             }
         }
 
