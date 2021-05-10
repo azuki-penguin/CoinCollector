@@ -33,7 +33,7 @@ namespace Controllers
 
         private void ObserveAction()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && rigidBody.velocity.y == 0)
             {
                 Jump();
             }
