@@ -7,6 +7,7 @@ namespace Controllers
 {
     public class PlayerController : MonoBehaviour
     {
+        private Animator Animator;
         private Rigidbody2D rigidBody;
         private float jumpForce = 400.0f;
         private float walkForce = 20.0f;
@@ -22,13 +23,14 @@ namespace Controllers
         void Start()
         {
             rigidBody = GetComponent<Rigidbody2D>();
+            Animator = GetComponent<Animator>();
             ScoreManager = GameObject.Find("ScoreManager");
         }
 
         // Update is called once per frame
         void Update()
         {
-            ObserveAction();
+           ObserveAction();
         }
 
         private void ObserveAction()
@@ -45,6 +47,7 @@ namespace Controllers
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {
+                Animator.SetTrigger("WalkTrigger");
                 if (!HasReachedLeftMost)
                 {
                     Move(DirectionModel.Left);
@@ -52,10 +55,17 @@ namespace Controllers
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
+                Animator.SetTrigger("WalkTrigger");
                 if (!HasReachedRightMost)
                 {
                     Move(DirectionModel.Right);
                 }
+            }
+            if (rigidBody.velocity.x == 0
+              && !Input.GetKey(KeyCode.LeftArrow)
+              && !Input.GetKey(KeyCode.RightArrow))
+            {
+                Animator.SetTrigger("IdleTrigger");
             }
         }
 
