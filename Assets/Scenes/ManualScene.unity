@@ -525,6 +525,7 @@ GameObject:
   - component: {fileID: 753393312}
   - component: {fileID: 753393311}
   - component: {fileID: 753393310}
+  - component: {fileID: 753393313}
   m_Layer: 5
   m_Name: BackToTitleButton
   m_TagString: Untagged
@@ -595,7 +596,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 753393311}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 753393313}
+        m_TargetAssemblyTypeName: Controllers.ManualSceneController, Assembly-CSharp
+        m_MethodName: BackToTitle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &753393311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,6 +647,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753393308}
   m_CullTransparentMesh: 1
+--- !u!114 &753393313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753393308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a63ed456d6cded601b18b17a5ac670da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1242664594
 GameObject:
   m_ObjectHideFlags: 0

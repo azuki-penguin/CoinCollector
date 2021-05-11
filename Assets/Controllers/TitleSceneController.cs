@@ -11,6 +11,11 @@ namespace Controllers
         {
             SceneManager.LoadScene("GameScene");
         }
+
+        public void ShowManual()
+        {
+            SceneManager.LoadScene("ManualScene");
+        }
     }
 }
 
