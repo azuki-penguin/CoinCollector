@@ -12,10 +12,12 @@ namespace Controllers
         private float jumpForce = 400.0f;
         private float walkForce = 20.0f;
         private float maxWalkSpeed = 3.0f;
-        private float JumpSpeedThreshold = 1.2f;
+        private float JumpSpeedThreshold = 0.2f;
         private float WalkSpeedThreshold = 0.1f;
         private PlayerStatus Status = PlayerStatus.Idle;
         private GameObject ScoreManager;
+
+        public LayerMask GroundLayer;
 
         private bool HasReachedLeftMost =>
             transform.position.x < Camera.main.ScreenToWorldPoint(Vector3.zero).x;
@@ -40,13 +42,16 @@ namespace Controllers
 
         private PlayerStatus GetPlayerStatus()
         {
-            if (IsJumping())
+            if (!IsGrounded())
             {
-                return PlayerStatus.Jump;
-            }
-            if (IsFalling())
-            {
-                return PlayerStatus.Fall;
+                if (IsJumping())
+                {
+                    return PlayerStatus.Jump;
+                }
+                else
+                {
+                    return PlayerStatus.Fall;
+                }
             }
             if (IsWalking())
             {
@@ -69,19 +74,25 @@ namespace Controllers
                     Animator.SetTrigger("JumpUpTrigger");
                     break;
                 case PlayerStatus.Fall:
-                    Animator.SetTrigger("IdleTrigger");
+                    Animator.SetTrigger("FallTrigger");
                     break;
             }
+        }
+
+        private bool IsGrounded()
+        {
+            var hit = Physics2D.Raycast(
+                transform.position,
+                Vector2.down,
+                1.0f,
+                GroundLayer
+            );
+            return hit.collider != null;
         }
 
         private bool IsJumping()
         {
             return rigidBody.velocity.y > JumpSpeedThreshold;
-        }
-
-        private bool IsFalling()
-        {
-            return rigidBody.velocity.y < -JumpSpeedThreshold;
         }
 
         private bool IsWalking()
