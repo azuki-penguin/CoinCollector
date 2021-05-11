@@ -16,6 +16,11 @@ namespace Controllers
         {
             SceneManager.LoadScene("ManualScene");
         }
+
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
     }
 }
 
