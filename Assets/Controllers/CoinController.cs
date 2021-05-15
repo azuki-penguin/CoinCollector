@@ -7,6 +7,7 @@ using UniRx;
 public class CoinController : MonoBehaviour
 {
     public GameObject CoinPrefab;
+    public GameObject CoinAudioManager;
     private const int Duration = 3;
 
     // Start is called before the first frame update
@@ -21,6 +22,7 @@ public class CoinController : MonoBehaviour
 
     void OnDisable()
     {
+        CoinAudioManager.GetComponent<AudioSource>().Play();
         Observable.Timer(TimeSpan.FromSeconds(Duration))
             .Subscribe(_ =>
             {
