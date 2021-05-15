@@ -131,6 +131,7 @@ namespace Controllers
         private void Jump()
         {
             rigidBody.AddForce(transform.up * jumpForce);
+            GetComponent<AudioSource>().Play();
         }
 
         private void Move(DirectionModel direction)
