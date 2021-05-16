@@ -17,6 +17,11 @@ namespace Controllers
             SceneManager.LoadScene("ManualScene");
         }
 
+        public void ShowCredit()
+        {
+            SceneManager.LoadScene("CreditScene");
+        }
+
         public void QuitGame()
         {
             Application.Quit();
